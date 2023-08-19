@@ -6,7 +6,8 @@ const controller = require("./controller")
 router.get('/',
 controller.loadPage.bind(controller));
 
-// router.post('/');
+router.post('/',
+controller.register.bind(controller));
 
 
 

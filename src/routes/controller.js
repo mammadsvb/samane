@@ -1,6 +1,11 @@
 const {validationResult} = require("express-validator");
+const User = require("../models/User")
 
 module.exports = class {
+
+    constructor(){
+        this.User = User;
+    }
 
     validationBody(req,res,next){
 
