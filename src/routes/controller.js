@@ -11,6 +11,7 @@ module.exports = class {
             const err = result.array();
             const msg = [];
             err.forEach(e => msg.push(e.msg));
+            req.flash("errors",msg)
         }
         next();
     }
