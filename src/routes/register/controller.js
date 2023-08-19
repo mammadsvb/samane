@@ -21,6 +21,9 @@ module.exports = new class extends Controller{
                 return res.redirect("register");
             }
 
+            const salt = await bcrypt.genSalt(10);
+            password = await bcrypt.hash(password,salt);
+
             user = new this.User({
                 firstname,
                 lastname,
