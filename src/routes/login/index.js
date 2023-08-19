@@ -9,6 +9,8 @@ controller.loadPage.bind(controller));
 
 
 router.post("/",
+validator.validator(),
+controller.validationBody.bind(controller),
 controller.login.bind(controller));
 
 
