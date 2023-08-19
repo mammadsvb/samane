@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-const config = require(config)
+const config = require("config")
 const cookieParser = require("cookie-parser");
 const session = require('express-session');
 const flash = require("connect-flash");
@@ -13,6 +13,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/samane")
 .then(()=>console.log("connected."))
 .catch(()=>console.log("couldn't connect."))
 
+
 app.use(cookieParser(config.get("cookie-secret")));
 app.use(session({
     secret: config.get("session-secret"),
@@ -22,7 +23,10 @@ app.use(session({
 
 app.use(flash())
 
-router('/',router);
+
+app.set("view engine","ejs");
+
+app.use('/',router);
 
 const port = process.env.PORT || 3000;
 

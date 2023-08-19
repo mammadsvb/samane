@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("./controller")
-const validator = require("./validator")
+// const validator = require("./validator");
 
-router.get('/');
+router.get('/',
+controller.loadPage.bind(controller));
 
-router.post('/');
+// router.post('/');
 
 
 
