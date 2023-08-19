@@ -13,8 +13,10 @@ module.exports = new class extends Controller{
         {  
             let {firstname,lastname,username,password} = req.body;
 
-            let user = await this.User.findOne({username:username});
+            if(!firstname | !lastname | !username | !password )
+                return res.redirect("register");
 
+            let user = await this.User.findOne({username:username});
 
             if(user){
                 req.flash("errors","This username has already been chosen");
