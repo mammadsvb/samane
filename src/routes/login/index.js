@@ -4,7 +4,8 @@ const router = express.Router();
 const controller = require("./controller");
 const validator = require("./validator"); 
 
-router.get("/");
+router.get("/",
+controller.loadPage.bind(controller));
 
 
 router.post("/");

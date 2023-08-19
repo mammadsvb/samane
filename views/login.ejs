@@ -1,0 +1,35 @@
+<Html>  
+    <head>   
+    <title>  
+    Registration Page  
+    </title>  
+    </head>  
+    <body style="background-color:Lightskyblue;">  
+    <br>  
+    <br> 
+    
+    <%if(err.length  !== 0){%>
+        <ul>
+            <% err.forEach(err =>{ %>
+            
+                <li><%= err %></li>
+
+            <% }) %>
+            
+
+        </ul>   
+    <% } %>
+
+    <form action="/login" method="post">  
+      
+    <label> Username: </label>         
+    <input type="text" name="username" size="15"/> <br> <br> 
+
+    <label> Password: </label>     
+    <input type="text" name="password" size="15"/> <br> <br>  
+
+    <input type="submit" value="Submit"/>  
+
+    </form>  
+    </body>  
+    </html>  
