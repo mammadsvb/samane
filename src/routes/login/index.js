@@ -8,7 +8,8 @@ router.get("/",
 controller.loadPage.bind(controller));
 
 
-router.post("/");
+router.post("/",
+controller.login.bind(controller));
 
 
 module.exports = router;
