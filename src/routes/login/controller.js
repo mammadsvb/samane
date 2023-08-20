@@ -35,7 +35,7 @@ module.exports = new class extends Conteroller {
 
             res.cookie('id',token,{signed : true , maxAge: 24*60*60*1000});
 
-            res.redirect("register");
+            res.redirect("admin");
 
 
         }catch(err){

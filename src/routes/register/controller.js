@@ -35,7 +35,7 @@ module.exports = new class extends Controller{
 
             await user.save();
 
-            res.redirect("register");}
+            res.redirect("login");}
         catch(e){
             console.log(e);
         }
