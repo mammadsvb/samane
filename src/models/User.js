@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     lastname  : {type:String},
     username  : {type:String , required : true ,unique : true},
     password  : {type:String , required : true},
+    isAdmin   : {type:Boolean , default : false}
 });
 
 userSchema.plugin(timestamp);

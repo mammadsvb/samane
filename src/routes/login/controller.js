@@ -6,10 +6,7 @@ const config = require("config");
 module.exports = new class extends Conteroller {
 
     loadPage(req,res){
-        console.log(req.user)
-        // if(req.user)
-        //     return res.redirect("admin")
-        console.log(1)
+        
         res.render("login",{err:req.flash("errors")});
     }
 

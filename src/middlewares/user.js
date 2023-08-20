@@ -5,7 +5,7 @@ const config = require("config");
 async function isLoggedin(req,res,next){
 
     const token = req.signedCookies.id;
-    console.log(token)
+
     if(!token){
         req.flash("errors","first login");
         return res.redirect("login");
@@ -18,7 +18,7 @@ async function isLoggedin(req,res,next){
         req.user = user;
         next();
     }catch(err){
-        req.flash("errors","denied access.");
+        req.flash("errors","access denied.");
         console.error(err);
         res.redirect("login");
     }
@@ -27,7 +27,7 @@ async function isLoggedin(req,res,next){
 async function loginPage(req,res,next){
 
     const token = req.signedCookies.id;
-    console.log(token)
+
     if(!token){
         return next();
     }
@@ -37,13 +37,24 @@ async function loginPage(req,res,next){
 
         const user = await User.findById(decode.id);
         req.user = user;
-        res.redirect("admin")
+        if(user.isAdmin)
+            return res.redirect("admin")
+        next();
     }catch(err){
         next();
     }
 }
 
+function isAdmin(req,res,next){
+    if(!req.user.isAdmin) {
+        req.flash("errors","access debied.");
+        return res.redirect("login");
+    }
+    next();
+}
+
 module.exports = {
     isLoggedin,
-    loginPage
+    loginPage,
+    isAdmin
 }
