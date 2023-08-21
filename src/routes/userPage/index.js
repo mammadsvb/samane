@@ -10,5 +10,7 @@ router.post("/",
 controller.getFile().single("filename"),
 controller.sayHello.bind(controller));
 
+router.delete('/',
+controller.logout.bind(controller))
 
 module.exports = router;

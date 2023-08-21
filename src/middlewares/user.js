@@ -38,8 +38,8 @@ async function loginPage(req,res,next){
         const user = await User.findById(decode.id);
         req.user = user;
         if(user.isAdmin)
-            return res.redirect("admin")
-        next();
+            return res.redirect("admin");
+        res.redirect("user");
     }catch(err){
         next();
     }

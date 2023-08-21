@@ -30,5 +30,10 @@ module.exports = new class extends Conteroller{
         console.log(req.file);
         res.redirect("user");
     }
+
+    logout(req,res){
+        res.clearCookie('id');
+        res.redirect("login");
+    }
     
 }
