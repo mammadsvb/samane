@@ -35,9 +35,11 @@ module.exports = new class extends Conteroller {
             const token = jwt.sign({id:user.id},config.get("token-key"));
 
             res.cookie('id',token,{signed : true , maxAge: 24*60*60*1000});
+            
+            if(user.isAdmin)
+               return res.redirect("admin");
 
-            res.redirect("admin");
-
+            res.redirect("user");
 
         }catch(err){
             console.error(err);
