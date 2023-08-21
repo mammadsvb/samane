@@ -13,6 +13,16 @@
         <input type="submit" value="send">
       </form>
 
+    <% if(videos.length != 0){ %>
+        <form action="/user/video" method="post">
+            <% videos.forEach( (v,i) =>{ %>
+                <input type="submit" name="<%= v %>" value="video <%= i+1 %>">
+            <% }) %>
+
+        </form>
+    
+    <% } %>
+
       <form action="/user?_method=DELETE" method="post">
         <input type="submit" value="log out">
       </form>
