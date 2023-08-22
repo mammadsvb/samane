@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const {isLoggedin,loginPage,isAdmin} = require('../middlewares/user')
+const {isLoggedin,loginPage,isAdmin} = require('../middlewares/user');
+// const {mid} = require('../middlewares/upload')
 const registerRouter = require("./register");
 const loginRouter = require("./login");
 const userRouter = require("./userPage");

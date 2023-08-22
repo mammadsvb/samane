@@ -1,18 +1,19 @@
-const multer = require('multer');
-const mkdir = require('mkdirp');
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        // mkdir('./public/uploads/imgages').then(made=>{
-        //     cb(null, './public/uploads/imgages');
-        // })
-        cb(null, './public/uploads')
-    },
-    filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' + file.originalname )
-    }
-})
-   
-const upload = multer({ storage: storage });
+function mid(req,res,next){
+  console.log("---------------------");
+  if(Object.keys(req.body).length)
+  {
+    console.log(req.video);
+    const namse = Object.keys(req.body).pop();
+    // console.log(namse,typeof(namse))
+    req.video = {namse};
+  }
+  console.log(req.video);
+  console.log("---------------------");
+  
+  next();
+}
 
-module.exports = upload;
+module.exports ={
+  mid
+}

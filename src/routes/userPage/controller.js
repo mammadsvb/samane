@@ -1,21 +1,21 @@
 const Conteroller = require("../controller");
 const multer = require("multer");
-const mkdir = require('mkdirp');
-const fs = require("fs")
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const fs = require("fs");
+const path = require("path");
+
 module.exports = new class extends Conteroller{
 
     loadPage(req,res){
-        console.log(fs.readdirSync("./public/uploads"))
-        // console.log(req.user)
+
         res.render("user",{videos:fs.readdirSync("./public/uploads")});
     }
 
     getFile(){
         const storage = multer.diskStorage({
             destination: function (req, file, cb) {
-                // mkdir('./public/uploads').then(made=>{
-                //     cb(null, './public/uploads');
-                // })
+
                 cb(null, './public/uploads');
             },
             filename: function (req, file, cb) {
@@ -38,9 +38,31 @@ module.exports = new class extends Conteroller{
         res.redirect("login")
     }
 
+
     getvideoname(req,res){
-        req.video = Object.keys(req.body).pop()
-        res.redirect("user");
+        
+        if(Object.keys(req.body).length)
+        {
+          const videoName = Object.keys(req.body).pop();
+          const token = jwt.sign({videoName:videoName},config.get("token-key"));
+          res.cookie('videoName',token,{signed : true});
+
+        }
+        
+        res.redirect("video");
     }
     
+    stream(req,res){
+        const token = req.signedCookies.videoName;
+        if(!token)
+            return res.send("ssssssssss")
+        
+        const decode = jwt.verify(token,config.get('token-key'));
+
+        const videoPath = './public/uploads/' +decode.videoName;
+        console.log(videoPath);
+
+        res.render('video',{path:videoPath})
+    }
+
 }

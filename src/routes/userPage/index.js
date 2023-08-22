@@ -14,6 +14,9 @@ router.delete('/',
 controller.logout.bind(controller))
 
 router.post('/video',
-controller.getvideoname.bind(controller))
+controller.getvideoname.bind(controller));
+
+router.get('/video',
+controller.stream.bind(controller))
 
 module.exports = router;
