@@ -4,10 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>admin</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
     <h1>Admin</h1>
-    
+
+    <table>
+        <thead>
+            <tr>
+                <td>firstname</td>
+                <td>lastname</td>
+                <td>username</td>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            <% users.forEach(user=>{ %>
+                <tr>
+                    <td><%= user.firstname %></td>
+                    <td><%= user.lastname %></td>
+                    <td><%= user.username %></td>
+                    <td>
+                        <form action="/admin/<%= user.id %>?_method=DELETE" method="post">
+                            <input type="submit" value="remove">
+                        </form>
+                    </td>
+                </tr>   
+
+            <% }) %>
+            
+        </tbody>
+    </table>
+
+
 </body>
 </html>
