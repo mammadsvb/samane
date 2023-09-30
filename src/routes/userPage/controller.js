@@ -9,7 +9,7 @@ module.exports = new class extends Conteroller{
 
     loadPage(req,res){
 
-        res.render("user",{videos:fs.readdirSync("./public/uploads")});
+        res.render("user",{videos:fs.readdirSync("./public/uploads"),err:req.flash("errors")});
     }
 
     getFile(){
@@ -21,9 +21,18 @@ module.exports = new class extends Conteroller{
             filename: function (req, file, cb) {
               cb(null, Date.now() + '-' + file.originalname )
             }
-        })
+        });
+
+        const multerFilter = (req, file, cb) => {
+            if (file.mimetype.split("/")[1] === "mp4") {
+              cb(null, true);
+            } else {
+                req.flash("errors","not mp4.")
+              cb(null, false);
+            }
+          };
            
-        const upload = multer({ storage: storage });
+        const upload = multer({ storage: storage,fileFilter: multerFilter });
           
           return upload;      
     }
@@ -58,8 +67,8 @@ module.exports = new class extends Conteroller{
             return res.send("ssssssssss")
         
         const decode = jwt.verify(token,config.get('token-key'));
-
-        const videoPath = './public/uploads/' +decode.videoName;
+        console.log(fs.readdirSync('./public/uploads'))
+        const videoPath = '/uploads/' +decode.videoName;
         console.log(videoPath);
 
         res.render('video',{path:videoPath})

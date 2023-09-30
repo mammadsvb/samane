@@ -6,6 +6,17 @@
     <title>user page</title>
 </head>
 <body>
+  <%if(err.length  !== 0){%>
+    <ul>
+        <% err.forEach(err =>{ %>
+        
+            <li><%= err %></li>
+
+        <% }) %>
+        
+
+    </ul>   
+<% } %>
 
     <h1>user page</h1>
     <form action="/user" method="post" enctype="multipart/form-data">
